@@ -43,4 +43,18 @@ router.put('/:id', (req, res) => {
     });
 });
 
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+
+  db('accounts')
+    .where({id})
+    .delete()
+    .then(account => {
+      res.status(200).json(account);
+    })
+    .catch(error => {
+      res.status(500).json({message: "Couldn't find the id"});
+    });
+});
+
 module.exports = router;
